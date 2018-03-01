@@ -8,8 +8,9 @@
     </block>
   </view>
   <view class='tab-felx'>
-    <view class='tab' wx:for="{{tabList}}" wx:key="tab">
+    <view class='tab' wx:for="{{tabList}}" wx:key="tab" bind:tap='tapname'>
       {{item}}
     </view>
   </view>
+
 </view>

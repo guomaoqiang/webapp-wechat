@@ -16,6 +16,9 @@ Page({
       url: '../logs/logs'
     })
   },
+  tapname: (e) => {
+    console.log(e);
+  },
   // 页面渲染完成
   onLoad: function () {
     if (app.globalData.userInfo) {
