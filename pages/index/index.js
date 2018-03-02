@@ -9,6 +9,7 @@ Page({
   data: {
     tabList: ['财经要闻','深度专题','实时动态'],
     newsList: [],
+    isactive: 0,
     hasUserInfo: false
   },
   //事件处理函数
@@ -17,8 +18,11 @@ Page({
       url: '../logs/logs'
     })
   },
-  tapname: (e) => {
+  switchTab: function(e){
     console.log(e);
+    this.setData({
+      isactive: e.currentTarget.dataset.idx
+    })
   },
   upper: function(e) {
     // console.log('upper');

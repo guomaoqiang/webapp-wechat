@@ -1,12 +1,12 @@
 <!--index.wxml-->
 <view class="container">
   <view class='tab-felx'>
-    <view class='tab' wx:for="{{tabList}}" wx:key="tab" bind:tap='tapname'>
+    <view class="tab {{isactive===index?'active':''}}" wx:for="{{tabList}}" wx:key="tab" bindtap="switchTab" data-idx="{{index}}">
       {{item}}
     </view>
   </view>
   <scroll-view scroll-y="true" class="felx-warp" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-    <view class='flex-content'>
+    <view class='flex-content' hidden="{{isactive===0?'':true}}">
       <view class='felx-news' wx:for="{{newsList}}" wx:key='news'>
         <view class='felx-news-left'>
           <view class='felx-title'>{{item.title}}</view>
@@ -19,5 +19,7 @@
         </view>
       </view>
     </view>
+    <view hidden="{{isactive===1?'':true}}">2</view>
+    <view hidden="{{isactive===2?'':true}}">3</view>
   </scroll-view>
 </view>
