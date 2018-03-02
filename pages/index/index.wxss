@@ -6,10 +6,64 @@
 	font-size: 30rpx;
 	color: #999;
 	display: flex;
+	position: fixed;
+	top: 0;
 	align-items: center;
+	background-color: #fff;
+	z-index: 999;
 	box-shadow: 0 2rpx 3rpx rgba(0,0,0,.15);
 }
 .tab-felx .tab {
 	flex: 1;
 	text-align: center;
 }
+.felx-warp {
+	margin-top: 75rpx;
+	height: 1500rpx;
+}
+.flex-content .felx-news {
+	height: 140rpx;
+	/*width: 100%;*/
+	display: flex;
+	padding: 30rpx;
+	position: relative;
+	-webkit-flex-flow:row nowrap;  
+    justify-content:space-around;  
+    align-content:flex-start;  
+    align-items:flex-start; 
+	/*margin: 0 30rpx;*/
+	/*border-bottom: 1px solid #E5E5E5;*/
+}
+.felx-news::after {
+	content: '';
+	position: absolute;
+	height: 1px;
+	width: 93%;
+	left: 30rpx;
+	bottom: 0;
+	background-color: #E5E5E5;
+}
+.felx-news-left {
+	/*width: 4rpx;*/
+}
+.felx-news-left .felx-title {
+	font-size: 34rpx;
+	/*line-height: 34rpx;*/
+	color: #4a4a4a;
+	padding-right: 22.5rpx;
+
+	display: -webkit-box;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.felx-news-left .felx-bottom {
+	font-size: 28rpx;
+	color: #999;
+} 
+.felx-news-right .felx-image .image{
+	width: 195rpx;
+	height: 135rpx;
+}
+

@@ -5,4 +5,19 @@
       {{item}}
     </view>
   </view>
+  <scroll-view scroll-y="true" class="felx-warp" bindscrolltoupper="upper" bindscrolltolower="lower"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <view class='flex-content'>
+      <view class='felx-news' wx:for="{{newsList}}" wx:key='news'>
+        <view class='felx-news-left'>
+          <view class='felx-title'>{{item.title}}</view>
+          <view class='felx-bottom'>{{item.createdTime}}</view>
+        </view>
+        <view class='felx-news-right'>
+          <view class='felx-image'>
+            <image class='image' src="{{item.imageUrl}}"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
 </view>
