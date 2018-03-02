@@ -2,6 +2,9 @@
 //获取应用实例
 const app = getApp()
 
+import { request } from '../../utils/util';
+
+
 Page({
   data: {
     tabList: ['财经要闻','深度专题','实时动态'],
@@ -17,35 +20,11 @@ Page({
   tapname: (e) => {
     console.log(e);
   },
-  request: (data) => {
-    return new Promise((resolve,reject) => {
-      wx.request({
-        url: 'https://kitgp.pingan.com.cn/jkkit-gp/service',
-        method: 'POST',
-        dataType: 'json',
-        data: data,
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success: function(res){
-          if (res.statusCode === 200 && res.data.responseCode === '000000') { //请求成功
-            resolve(res);
-          } else { // 请求失败
-            reject(res);
-          }
-        },
-        fail: function(res) {
-          reject(res);
-        }
-      })
-    })
-  }, 
   // 页面渲染完成
   onLoad: function () {
     wx.showLoading({
-      title:'加载中',
+      title: '加载中',
       mask: true,
-
     })
     let data = {
       "appKey":"P_JKOPEN_ZYYH",
@@ -55,7 +34,7 @@ Page({
         "limit":15
       }
     };
-    this.request(data).then((res) => {
+    request(data).then((res) => {
       wx.hideLoading();
       console.log(res);
     },(res) => {
