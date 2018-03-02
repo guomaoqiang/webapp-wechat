@@ -4,9 +4,11 @@
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle":"darke",
+    "navigationBarBackgroundColor": "#18BAF9",
     "navigationBarTitleText": "第一个小程序demo",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"#fff",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50
   }
 }

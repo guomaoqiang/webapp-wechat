@@ -1,30 +1,13 @@
 /**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-}
-
 /*tab切换*/
 .tab-felx {
 	width: 100%;
+	height: 75rpx;
+	font-size: 30rpx;
+	color: #999;
 	display: flex;
 	align-items: center;
+	box-shadow: 0 2rpx 3rpx rgba(0,0,0,.15);
 }
 .tab-felx .tab {
 	flex: 1;

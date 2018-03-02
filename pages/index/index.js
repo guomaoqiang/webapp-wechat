@@ -5,10 +5,8 @@ const app = getApp()
 Page({
   data: {
     tabList: ['财经要闻','深度专题','实时动态'],
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    newList: [],
+    hasUserInfo: false
   },
   //事件处理函数
   bindViewTap: () => {
@@ -19,41 +17,88 @@ Page({
   tapname: (e) => {
     console.log(e);
   },
-  // 页面渲染完成
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+  request: (data) => {
+    return new Promise((resolve,reject) => {
+      wx.request({
+        url: 'https://kitgp.pingan.com.cn/jkkit-gp/service',
+        method: 'POST',
+        dataType: 'json',
+        data: data,
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success: function(res){
+          if (res.statusCode === 200 && res.data.responseCode === '000000') { //请求成功
+            resolve(res);
+          } else { // 请求失败
+            reject(res);
+          }
+        },
+        fail: function(res) {
+          reject(res);
         }
       })
-    }
+    })
+  }, 
+  // 页面渲染完成
+  onLoad: function () {
+    wx.showLoading({
+      title:'加载中',
+      mask: true,
+
+    })
+    let data = {
+      "appKey":"P_JKOPEN_ZYYH",
+      "method":"info.getNewsList",
+      "requestData": {
+        "type":"news",
+        "limit":15
+      }
+    };
+    this.request(data).then((res) => {
+      wx.hideLoading();
+      console.log(res);
+    },(res) => {
+      wx.hideLoading();
+      console.log('请求出错:'+res);
+      wx.showToast({
+        title: res.data.responseMessage,
+        icon: 'none'
+      })
+    })
+    // if (app.globalData.userInfo) {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo,
+    //     hasUserInfo: true
+    //   })
+    // } else if (this.data.canIUse){
+    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //   // 所以此处加入 callback 以防止这种情况
+    //   app.userInfoReadyCallback = res => {
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     })
+    //   }
+    // } else {
+    //   // 在没有 open-type=getUserInfo 版本的兼容处理
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       app.globalData.userInfo = res.userInfo
+    //       this.setData({
+    //         userInfo: res.userInfo,
+    //         hasUserInfo: true
+    //       })
+    //     }
+    //   })
+    // }
   },
   getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    // console.log(e)
+    // app.globalData.userInfo = e.detail.userInfo
+    // this.setData({
+    //   userInfo: e.detail.userInfo,
+    //   hasUserInfo: true
+    // })
   }
 })
